@@ -1,0 +1,8 @@
+Dear {{ user.first_name }} {{ user.last_name }},
+
+We’re sorry to see you leave. Your account has been successfully deleted as per your request. If there’s anything we could have done better, we’d love to hear your feedback.
+
+If you ever decide to return, you’re always welcome to join us again.
+
+Wishing you all the best,
+The Mhero Team

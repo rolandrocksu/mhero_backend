@@ -1,0 +1,26 @@
+# Byte-compiled
+__pycache__/
+*.pyc
+
+# Environmental
+*.env
+env/
+.venv/
+venv
+
+# Django related
+db.sqlite3
+staticfiles/
+static/
+media/*
+
+# Editor related
+.idea/
+.vscode
+.vscode/
+
+# Other
+/src/
+.pytest_cache
+.coverage
+.DS_Store

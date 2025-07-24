@@ -1,0 +1,8 @@
+INVALID_TOKEN = "Token is invalid or expired."
+INVALID_USER_ID = "User id is invalid."
+INVALID_REFRESH_TOKEN = "The refresh token is invalid or expired."
+PASSWORDS_UNMATCH = "Password fields didn't match."
+INVALID_OLD_PASSWORD = "Invalid old password."
+NON_EXISTING_USER = "User with this email or phone number does not exist"
+INVALID_TOKEN_OR_EMAIL = "Token or email is incorrect."
+USER_EXISTS = "The user with this email address already exists"

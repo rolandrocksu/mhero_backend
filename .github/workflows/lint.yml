@@ -1,0 +1,23 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - run: |
+          touch .env
+          pip install --upgrade pip
+          pip install flake8==7.1.1
+          docker compose --env-file /dev/null run --rm mhero-backend flake8

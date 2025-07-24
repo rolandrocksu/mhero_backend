@@ -1,0 +1,21 @@
+[run]
+relative_files = True
+source =
+    mhero_backend_django
+    lib
+    accounts
+    payments
+omit=
+    staticfiles/*
+    static/*
+    */migrations/*
+    */test/*
+    */apps.py
+    */factories.py
+    */manage.py
+    */settings.py
+    */celery.py
+    */asgi.py
+    */wsgi.py
+    */schemas.py
+    */swagger_utils.py

@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  mhero-postgres:
+    image: postgres:14.4
+    environment:
+      POSTGRES_DB: "mhero_backend_db"
+      POSTGRES_USER: "mhero_backend_user"
+      POSTGRES_PASSWORD: "mhero_backend_password"
+    networks:
+      - common-network
+    volumes:
+      - "mhero-postgres:/var/lib/postgresql/data"
+    ports:
+      - "5434:5432"
+
+  mhero-backend:
+    build:
+      context: .
+    env_file: ./.env
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mhero-postgres
+    networks:
+      - common-network
+
+volumes:
+  mhero-postgres:
+
+networks:
+  common-network:
+    driver: bridge
