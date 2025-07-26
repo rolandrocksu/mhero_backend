@@ -28,7 +28,6 @@ from accounts.api.serializers import (
     LogoutSerializer,
     GoogleAuthSerializer,
     AppleAuthSerializer,
-    AmazonAuthSerializer,
 )
 from lib.api_mixins import PublicAPIMixin
 
@@ -92,7 +91,3 @@ class GoogleLoginAPIView(BaseSocialLoginAPIView):
 
 class AppleLoginAPIView(BaseSocialLoginAPIView):
     serializer_class = AppleAuthSerializer
-
-
-class AmazonLoginAPIView(BaseSocialLoginAPIView):
-    serializer_class = AmazonAuthSerializer

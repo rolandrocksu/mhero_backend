@@ -5,7 +5,6 @@ from .login_views import (
     TokenVerifyAPIView,
     GoogleLoginAPIView,
     AppleLoginAPIView,
-    AmazonLoginAPIView,
 )
 
 from .user_views import (
@@ -15,14 +14,12 @@ from .user_views import (
 )
 
 __all__ = [
-
     # From login_views
     "LogoutAPIView",
     "TokenRefreshAPIView",
     "TokenVerifyAPIView",
     "GoogleLoginAPIView",
     "AppleLoginAPIView",
-    "AmazonLoginAPIView",
     # From user_views
     "UserRetrieveUpdateAPIView",
     "RequestAccountDeletionAPIView",
