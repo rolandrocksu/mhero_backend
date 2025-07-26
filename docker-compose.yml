@@ -28,6 +28,18 @@ services:
     networks:
       - common-network
 
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/mhero.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - mhero-backend
+    networks:
+      - common-network
+
+
 volumes:
   mhero-postgres:
 
