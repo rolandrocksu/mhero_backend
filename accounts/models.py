@@ -11,9 +11,8 @@ class MheroUser(AbstractUser):
     username = None
     date_joined = None
 
-    email = models.EmailField(unique=True, null=True, blank=True, default=None)
+    email = models.EmailField(unique=True)
     company = models.CharField(max_length=255, null=True, blank=True)
-    profile_photo = models.ImageField(upload_to="profiles/avatars/", null=True, blank=True)
     stripe_customer_id = models.CharField(max_length=255, null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -52,15 +51,6 @@ class MheroUser(AbstractUser):
                 pass
 
         return valid_tokens
-
-    def save(self, *args, **kwargs):
-        self.full_clean()
-
-        if self.email == "" or self.email is None:
-            self.email = None
-        if self.phone_number == "" or self.phone_number is None:
-            self.phone_number = None
-        super().save(*args, **kwargs)
 
 
 class AccountDeletion(models.Model):

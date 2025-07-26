@@ -5,6 +5,7 @@ from .login_views import (
     TokenVerifyAPIView,
     GoogleLoginAPIView,
     AppleLoginAPIView,
+    TestLoginView
 )
 
 from .user_views import (
@@ -24,4 +25,6 @@ __all__ = [
     "UserRetrieveUpdateAPIView",
     "RequestAccountDeletionAPIView",
     "ConfirmAccountDeletionAPIView",
+    # TODO should be deleted
+    "TestLoginView"
 ]

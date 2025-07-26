@@ -1,3 +1,4 @@
+from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import update_last_login
 from django.utils.decorators import method_decorator
@@ -11,6 +12,8 @@ from rest_framework.status import (
     HTTP_201_CREATED,
     HTTP_205_RESET_CONTENT,
     HTTP_200_OK,
+    HTTP_400_BAD_REQUEST,
+    HTTP_404_NOT_FOUND
 )
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import (
@@ -29,6 +32,7 @@ from accounts.api.serializers import (
     GoogleAuthSerializer,
     AppleAuthSerializer,
 )
+from accounts.models import MheroUser
 from lib.api_mixins import PublicAPIMixin
 
 User = get_user_model()
@@ -79,7 +83,6 @@ class BaseSocialLoginAPIView(PublicAPIMixin, GenericAPIView):
             'refresh': str(token),
             "user_id": user.id,
             "email": user.email,
-            "phone_number": str(user.phone_number) if user.phone_number else None
         }
         status = HTTP_201_CREATED if created else HTTP_200_OK
         return Response(data, status=status)
@@ -91,3 +94,30 @@ class GoogleLoginAPIView(BaseSocialLoginAPIView):
 
 class AppleLoginAPIView(BaseSocialLoginAPIView):
     serializer_class = AppleAuthSerializer
+
+
+class TestLoginView(APIView):
+    # WARNING: Only enable this in development!
+    permission_classes = []
+    authentication_classes = []
+
+    def post(self, request):
+        email = request.data.get("email")
+        if not email:
+            return Response({"detail": "Email required"}, status=HTTP_400_BAD_REQUEST)
+        if email != "test@test.com":
+            return Response({"detail": "User not found"}, status=HTTP_404_NOT_FOUND)
+
+        user, created = MheroUser.objects.get_or_create(email=email)
+        if created:
+            user.set_unusable_password()  # No password, for safety
+            user.save()
+
+        token = RefreshToken.for_user(user)
+        data = {
+            'access': str(token.access_token),
+            'refresh': str(token),
+            "user_id": user.id,
+            "email": user.email,
+        }
+        return Response(data)

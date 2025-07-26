@@ -12,6 +12,7 @@ urlpatterns = [
     path('health/', include('health_check.urls')),
     path("v1/accounts/", include("accounts.urls")),
     path("v1/payments/", include("payments.urls")),
+    path("v1/insights/", include("insights.urls")),
 ]
 
 api_info = openapi.Info(

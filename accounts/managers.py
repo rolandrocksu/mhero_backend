@@ -5,13 +5,13 @@ from django.contrib.auth.models import UserManager
 class MheroUserManager(UserManager):
     """Overriding default UserManager's behavior to omit username field."""
 
-    def _create_user(self, email, phone_number, password, **extra_fields):
-        if not email and not phone_number:
-            raise ValueError("Users must have either an email or phone number")
+    def _create_user(self, email, password, **extra_fields):
+        if not email:
+            raise ValueError("Users must have an email")
 
         if email:
             email = self.normalize_email(email)
-        user = self.model(email=email, phone_number=phone_number, **extra_fields)
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -29,4 +29,4 @@ class MheroUserManager(UserManager):
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("Superuser must have is_superuser=True.")
 
-        return self._create_user(email=email, phone_number=None, password=password, **extra_fields)
+        return self._create_user(email=email, password=password, **extra_fields)

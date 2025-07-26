@@ -9,11 +9,13 @@ from accounts.api.views import (
     UserRetrieveUpdateAPIView,
     RequestAccountDeletionAPIView,
     ConfirmAccountDeletionAPIView,
+    TestLoginView,
 )
 
 urlpatterns = [
     # login paths
     # path("login/", LoginAPIView.as_view(), name="login"),
+    path('login/test/', TestLoginView.as_view(), name='google-login'),
     path('login/google/', GoogleLoginAPIView.as_view(), name='google-login'),
     path('login/apple/', AppleLoginAPIView.as_view(), name='apple-login'),
     path("token/refresh/", TokenRefreshAPIView.as_view(), name="token-refresh"),
