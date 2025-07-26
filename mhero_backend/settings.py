@@ -58,7 +58,6 @@ MIDDLEWARE = [
     # this should be before CommonMiddleware
     'corsheaders.middleware.CorsMiddleware',
     # this should be before CommonMiddleware too for load balancer
-    'mhero_backend.middleware.CustomAllowedHostsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',  # Required for admin
     'django.contrib.sessions.middleware.SessionMiddleware',  # Required for admin
@@ -160,15 +159,6 @@ AUTH_USER_MODEL = "accounts.MheroUser"
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Default backend
 ]
-
-
-# Email configs
-EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND")
-EMAIL_HOST = os.environ.get("EMAIL_HOST")
-EMAIL_PORT = os.environ.get("EMAIL_PORT")
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", 'noreply@mhero.io')
 
 # Logging configs
 
@@ -279,10 +269,6 @@ OTP_EXPIRE_TIME = 60 * int(os.environ.get('OTP_EXPIRE_MINUTES', 5))
 
 FRONT_END_BASE_URL = os.getenv('FRONT_END_BASE_URL')
 
-# Google-related configs
-GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
-GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
-
 # Amazon-related configs
 
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
@@ -305,15 +291,9 @@ MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
 MAX_IMAGE_SIZE_MB = int(os.environ.get("MAX_IMAGE_SIZE_MB", default=3))
 
 
-# AWS SES Region
-AWS_SES_REGION_NAME = os.environ.get('AWS_SES_REGION_NAME', 'eu-west-2')
-AWS_SES_REGION_ENDPOINT = os.environ.get(
-    'AWS_SES_REGION_ENDPOINT', 'email.eu-west-2.amazonaws.com'
-)
-AWS_SES_CONFIGURATION_SET = os.environ.get('AWS_SES_CONFIGURATION_SET', 'main')
-# Optional: Enable Auto-Throttling (prevents exceeding SES sending limits)
-# Wait 0.5 seconds between sends if near the rate limit
-AWS_SES_AUTO_THROTTLE = 0.5
+# Google-related configs
+GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
 
 # Apple-related configs
 APPLE_CLIENT_ID = os.environ.get('APPLE_CLIENT_ID')
