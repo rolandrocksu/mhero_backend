@@ -37,6 +37,8 @@ services:
       - ./nginx:/etc/nginx/conf.d
       - ./certbot/www:/var/www/certbot
       - ./certbot/conf:/etc/letsencrypt
+    depends_on:
+      - mhero-backend
     networks:
         - common-network
 
