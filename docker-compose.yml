@@ -37,6 +37,8 @@ services:
       - ./nginx:/etc/nginx/conf.d
       - ./certbot/www:/var/www/certbot
       - ./certbot/conf:/etc/letsencrypt
+    networks:
+        - common-network
 
 volumes:
   mhero-postgres:
