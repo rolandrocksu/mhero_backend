@@ -109,15 +109,3 @@ class AppleAuthSerializer(AbstractSocialAuthSerializer):
     @property
     def provider_class(self):
         return Apple
-
-
-class AmazonAuthSerializer(AbstractSocialAuthSerializer):
-    code = serializers.CharField(write_only=True)
-
-    @property
-    def provider(self):
-        return ProviderChoices.AMAZON
-
-    @property
-    def provider_class(self):
-        return Amazon

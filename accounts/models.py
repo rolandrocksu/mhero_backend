@@ -1,10 +1,10 @@
 from django.contrib.auth.models import AbstractUser
-from django.db import models, transaction
+from django.db import models
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from accounts.choices import ProviderChoices, AccountDeletionChoices
-from accounts.managers import  MheroUserManager
+from accounts.managers import MheroUserManager
 
 
 class MheroUser(AbstractUser):
