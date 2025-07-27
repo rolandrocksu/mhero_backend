@@ -83,6 +83,8 @@ class BaseSocialLoginAPIView(PublicAPIMixin, GenericAPIView):
             'refresh': str(token),
             "user_id": user.id,
             "email": user.email,
+            'tokens_used_today': user.tokens_used_today,
+            'remaining_tokens_today': user.remaining_tokens_today
         }
         status = HTTP_201_CREATED if created else HTTP_200_OK
         return Response(data, status=status)
@@ -119,5 +121,7 @@ class TestLoginView(APIView):
             'refresh': str(token),
             "user_id": user.id,
             "email": user.email,
+            'tokens_used_today': user.tokens_used_today,
+            'remaining_tokens_today': user.remaining_tokens_today
         }
         return Response(data)

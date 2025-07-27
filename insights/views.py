@@ -5,12 +5,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.utils import timezone
 from django.db import transaction
+from django.conf import settings
 
 from .models import UserDailyTokenUsage
 from .serializers import WebsiteAnalyzeSerializer, RedditDataSerializer
 from .utils import analyze_website, fetch_reddit_data
-
-MAX_DAILY_TOKENS = 3
 
 
 def can_use_token(user):
@@ -19,7 +18,7 @@ def can_use_token(user):
         user=user,
         date=today
     )
-    return usage.tokens_used < MAX_DAILY_TOKENS
+    return usage.tokens_used < settings.MAX_DAILY_TOKENS
 
 
 def use_token(user):
@@ -33,7 +32,7 @@ def use_token(user):
                 date=today
             )
         )
-        if usage.tokens_used >= MAX_DAILY_TOKENS:
+        if usage.tokens_used >= settings.MAX_DAILY_TOKENS:
             return False
         usage.tokens_used += 1
         usage.save()

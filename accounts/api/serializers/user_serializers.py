@@ -7,24 +7,22 @@ from accounts.choices import NotificationTransportChoices, AccountDeletionChoice
 from accounts.models import MheroUser, AccountDeletion
 from accounts.services import blacklist_user_valid_tokens
 from lib.notifications import NotificationService
-from lib.serializer_fields import Base64ImageField
 
 
 class UserReadOnlySerializer(serializers.ModelSerializer):
     class Meta:
         model = MheroUser
         fields = (
-            'id', 'first_name', 'last_name', 'company', 'last_login', 'is_active',
-            'email', 'phone_number', 'profile_photo', 'created_at'
+            'id', 'first_name', 'last_name', 'last_login', 'is_active',
+            'email', 'created_at', 'tokens_used_today', 'remaining_tokens_today'
         )
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):
-    profile_photo = Base64ImageField(allow_null=True)
 
     class Meta:
         model = MheroUser
-        fields = ('id', 'first_name', 'last_name', 'profile_photo')
+        fields = ('id', 'first_name', 'last_name')
         read_only_fields = ('id',)
 
 
